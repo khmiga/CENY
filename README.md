@@ -6,13 +6,13 @@ This repository contains the scripts used for the CENY paper. The steps for gene
 
 2. Align these full-length reads to the vector sequence using BLASR (https://github.com/ylipacbio/blasrbinary) and parameters (-sdpTupleSize 8 -bestn 1 -nproc 8 -m 0). This will produce alignments to the vector sequence in text format.
 
-3. You can filter the blasr alignment file to a new text file that contains just the basic metadat on every alignment (e.g. start and end coordinates, etc.). To do this, a simple grep woulr work (e.g. grep -A 8 -B 6 "Query:" reads.blasr).
+3. You can filter the blasr alignment file to a new text file that contains just the basic metadat on every alignment (e.g. start and end coordinates, etc.). To do this, a simple grep would work (e.g. grep -A 8 -B 6 "Query:" reads.blasr).
 
-4. Usibg the blasr_output.py script, reorient these reads such that all of them start with the vector sequence. Additionally, this script ensures that all reads are in one orientation (since multiple sequence alignment cares about read orientation). Lastly, the default settings in the script look for a > 3 kb long alignment to the vector sequence at  either end. This is our way of ensuring a second time that the reads being fed to an MSA are all full-length. (python blasr_output.py reads.blasr reads.fasta > reoriented.fa)
+4. Using the blasr_output.py script, reorient these reads such that all of them start with the vector sequence. Additionally, this script ensures that all reads are in one orientation (since multiple sequence alignment cares about read orientation). Lastly, the default settings in the script look for a > 3 kb long alignment to the vector sequence at  either end. This is our way of ensuring a second time that the reads being fed to an MSA are all full-length. (python blasr_output.py reads.blasr reads.fasta > reoriented.fa)
 
 5. Now randomly sample 60 reads from the reoriented reads, and do an MSA using kalign (http://msa.sbc.su.se/cgi-bin/msa.cgi).
 
-6. Next, we compute the consensus using a custom script ()
+6. Next, we compute the consensus using a custom script (kaln2CNS.pl)
 
 7. Repeat steps 5 and 6, 10 times (10 iterations). This will generate 10 consensus sequences.
 
